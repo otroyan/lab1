@@ -2,6 +2,9 @@ import re
 import timeit
 import time
 def is_simple(x):
+    if x == 0:
+        return False
+
     if x<=3:
         return True
     if not x%2:
@@ -27,13 +30,16 @@ def max_simple1(lst_num):
 def get_lst_of_complicated(n):
     multiplier = 2
     compl_lst = list()
-    for multiplier in range(2,n):
-
-        if pow(multiplier,2)>n:
+    for multiplier in range(2, n+1):
+        if pow(multiplier, 2) > n:
                 break
-        for j in range(multiplier*2,n+1,multiplier):
-            if not multiplier in compl_lst:
+        for j in range(multiplier*2, n+1, multiplier):
+            if not j in compl_lst:
                 compl_lst.append(j)
+
+    if not compl_lst:
+        return None
+
     return compl_lst
 
 def max_simple2(lst_num):
@@ -54,6 +60,8 @@ def get_lst_of_simple(n):
                 multiplier = lst_simple[idx+1]
             else:
                 break
+        if not lst_simple:
+            return None
         return lst_simple
 
 def max_simple3(lst_num):
